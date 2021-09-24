@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+	<title>Memory Game</title>
+	<meta charset="UTF-8">
+	<meta name="HW13" content="Memory Game using jQuery">
+	<meta name="Princess Owotade" content="HW13">
+    <script src="./jquery-3.6.0.min.js"></script>
+    <script>
+      
+      $(document).ready(function(){
+        $(".card").css("color", "rgba(0,0,0,0)");
+          var clicks = 0; 
+          var  tries = 0;
+          flipCard();
+          
+          
+        function flipCard(){
+        
+        $(".card").click(function(){
+            
+            clicks += 1;
+            
+            
+            if(clicks > 1){
+                tries++;
+                clicks = 0;
+                $(".card").attr("disabled", true)
+                  
+                setTimeout(function () {
+                    $(".card").attr("disabled",false);
+                }, 3000); 
+            }
+            
+            $(this).css("color", "black");
+            
+            $(this).fadeOut(3000, function() {
+                $(".card").css("color", "rgba(0,0,0,0)");
+                $(".card").fadeIn(0); 
+                $(".card").attr("disabled",false);
+                $(".matched").show();
+                $(".matched").stop(true, true);
+                Matched();
+                if(clicks == 1){ clicks = 0; return;}
+            });
+            
+            
+            });
+            
+        };
+          function Matched(){
+              
+            
+             $(".matched").attr("disabled", "true"); 
+             var totalMatches = document.getElementsByClassName("matched");
+              console.log(totalMatches.length);
+             if (totalMatches.length == 16){
+                 alert("It took you "+tries+" tries to complete the puzzle");
+		 alert = function() {};
+             }
+              
+          }; 
+      });
+        
+    </script>
+    <link rel="stylesheet" href="./mem.css">
+    <script type="text/javascript" src="./Memory.js" defer></script>
+</head> 
+
+<body>
+    
+    <h1>Memory Game</h1>
+
+<table style="border: 2px">
+    
+    <tr>
+        <td><input type="button" id="r1_c1" value="" class="card" onclick = "CheckCard('r1_c1')"> </td>
+        <td><input type="button" id="r1_c2" value="" class="card" onclick = "CheckCard('r1_c2')"> </td>
+        <td><input type="button" id="r1_c3" value="" class="card" onclick = "CheckCard('r1_c3')"> </td>
+        <td><input type="button" id="r1_c4" value="" class="card" onclick = "CheckCard('r1_c4')"> </td>
+    </tr>
+    
+    <tr>
+        <td><input type="button" id="r2_c1" value="" class="card" onclick = "CheckCard('r2_c1')"> </td>
+        <td><input type="button" id="r2_c2" value="" class="card" onclick = "CheckCard('r2_c2')"> </td>
+        <td><input type="button" id="r2_c3" value="" class="card" onclick = "CheckCard('r2_c3')"> </td>
+        <td><input type="button" id="r2_c4" value="" class="card" onclick = "CheckCard('r2_c4')"> </td>
+    </tr>
+    
+    <tr>
+        <td><input type="button" id="r3_c1" value="" class="card" onclick = "CheckCard('r3_c1')"> </td>
+        <td><input type="button" id="r3_c2" value="" class="card" onclick = "CheckCard('r3_c2')"> </td>
+        <td><input type="button" id="r3_c3" value="" class="card" onclick = "CheckCard('r3_c3')"> </td>
+        <td><input type="button" id="r3_c4" value="" class="card" onclick = "CheckCard('r3_c4')"> </td>
+    </tr>
+    
+    <tr>
+        <td><input type="button" id="r4_c1" value="" class="card" onclick = "CheckCard('r4_c1')"> </td>
+        <td><input type="button" id="r4_c2" value="" class="card" onclick = "CheckCard('r4_c2')"> </td>
+        <td><input type="button" id="r4_c3" value="" class="card" onclick = "CheckCard('r4_c3')"> </td>
+        <td><input type="button" id="r4_c4" value="" class="card" onclick = "CheckCard('r4_c4')"> </td>
+    </tr>
+    
+    
+    </table>
+    <br>
+    <br>
+    
+    <button onclick="window.location.reload();">Reshuffle Cards</button>
+
+</body>
+</html>
